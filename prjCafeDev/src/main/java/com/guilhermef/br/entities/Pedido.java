@@ -2,6 +2,7 @@ package com.guilhermef.br.entities;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,14 +19,14 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPedido;
 
-	@NotBlank
+	@NotBlank(message="Descrição obrigatória!")
 	private String descricao;
 
-	@NotNull
+	@NotNull(message="Valor inválido!")
 	private double valorTotal;
 
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	@NotBlank
+	@NotBlank(message="Data inválida!")
 	private String dataPedido;
 
 	@ManyToOne
@@ -35,14 +36,19 @@ public class Pedido {
 
 	}
 
-	public Pedido(Long idPedido, @NotBlank String descricao, double valorTotal, @NotBlank String dataPedido,
-			@NotBlank Cliente cliente) {
+
+
+	public Pedido(Long idPedido, @NotBlank(message = "Descrição obrigatória!") String descricao,
+			@NotNull(message = "Valor inválido!") double valorTotal,
+			@NotBlank(message = "Data inválida!") String dataPedido, Cliente cliente) {
 		this.idPedido = idPedido;
 		this.descricao = descricao;
 		this.valorTotal = valorTotal;
 		this.dataPedido = dataPedido;
 		this.cliente = cliente;
 	}
+
+
 
 	public Long getIdPedido() {
 		return idPedido;

@@ -10,13 +10,23 @@ public class ClienteResponseDto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCliente;
 
-	@NotBlank
+	@NotBlank(message="Nome inválido!")
 	private String nome;
+	
 
-	public ClienteResponseDto(Long idCliente, @NotBlank String nome) {
+	public ClienteResponseDto() {
+
+	}
+
+	
+	
+	public ClienteResponseDto(Long idCliente, @NotBlank(message = "Nome inválido!") String nome) {
+		super();
 		this.idCliente = idCliente;
 		this.nome = nome;
 	}
+
+
 
 	public Long getIdCliente() {
 		return idCliente;

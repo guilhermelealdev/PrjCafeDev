@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.guilhermef.br.Dtos.ClienteRequestDto;
 import com.guilhermef.br.Dtos.ClienteResponseDto;
 import com.guilhermef.br.entities.Cliente;
 import com.guilhermef.br.services.ClienteService;
@@ -33,8 +34,8 @@ public class ClienteController {
 	
 	@Operation(summary="Aqui fazemos o post de um cliente")
 	@PostMapping("/criar")
-	public Cliente salvarCliente(@RequestBody Cliente cliente) {
-		return clienteService.salvarCliente(cliente);
+	public ClienteResponseDto salvarCliente(@RequestBody ClienteRequestDto clienteDto) {
+		return clienteService.salvarCliente(clienteDto);
 	}
 	
 	@Operation(summary="Aqui deletamos um cliente por id")
@@ -51,7 +52,7 @@ public class ClienteController {
 	
 	@Operation(summary = "Aqui é feito um único get de um cliente por id")
 	@GetMapping("/{idCliente}")
-	public Cliente encontrarCliente(@PathVariable Long idCliente) {
+	public ClienteResponseDto encontrarCliente(@PathVariable Long idCliente) {
 		return clienteService.encontrarCliente(idCliente);
 	}
 	

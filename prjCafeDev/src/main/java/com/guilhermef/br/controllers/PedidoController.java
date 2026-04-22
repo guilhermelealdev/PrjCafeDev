@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.guilhermef.br.Dtos.PedidoRequestDto;
+import com.guilhermef.br.Dtos.PedidoResponseDto;
 import com.guilhermef.br.entities.Pedido;
 import com.guilhermef.br.services.PedidoService;
 
@@ -31,7 +33,7 @@ public class PedidoController {
 
 	@PostMapping("/criar")
 	@Operation(summary = "Aqui fazemos um post simples do pedido")
-	public Pedido salvarPedido(@RequestBody Pedido pedido) {
+	public PedidoResponseDto salvarPedido(@RequestBody PedidoRequestDto pedido) {
 		return pedidoService.salvarPedido(pedido);
 	}
 
@@ -43,13 +45,13 @@ public class PedidoController {
 
 	@GetMapping("/{idPedido}")
 	@Operation(summary = "Aqui fazemos um get de um pedido por id")
-	public Pedido encontrarPedido(@PathVariable Long idPedido) {
+	public PedidoResponseDto encontrarPedido(@PathVariable Long idPedido) {
 		return pedidoService.encontrarPedido(idPedido);
 	}
 
 	@GetMapping
 	@Operation(summary = "Aqui fazemos um get de todos os pedidos")
-	public List<Pedido> listarPedidos() {
+	public List<PedidoResponseDto> listarPedidos() {
 		return pedidoService.listarPedidos();
 	}
 	
@@ -60,9 +62,15 @@ public class PedidoController {
 	}
 	
 	@GetMapping("/crescente")
-	@Operation(summary = "Aqui fazemos um get de todos os pedidos")
+	@Operation(summary = "Aqui fazemos um get de todos os pedidos por ordem crescente")
 	public List<Pedido> listarPedidosMaisBaratos() {
 		return pedidoService.listarMaisBaratos();
+	}
+	
+	@GetMapping("/cliente/{nome}")
+	@Operation(summary = "Aqui é feito um get de todos os pedidos pelo nome")
+	public List<Pedido> buscarPorNome(@PathVariable String nome){
+		return pedidoService.buscarPorNomeCliente(nome);
 	}
 
 }

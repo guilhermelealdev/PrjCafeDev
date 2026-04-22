@@ -15,21 +15,27 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCliente;
 
-	@NotBlank
+	@NotBlank(message="Nome inválido!")
 	private String nome;
-
-	@Email
+	
+	@NotBlank(message="Email inválido!")
+	@Email(message="Email inválido")
 	private String email;
 
 	public Cliente() {
 
 	}
 
-	public Cliente(Long idCliente, @NotBlank String nome, @Email String email) {
+
+
+	public Cliente(Long idCliente, @NotBlank(message = "Nome inválido!") String nome,
+			@NotBlank(message = "Email inválido!") @Email(message = "Email inválido") String email) {
 		this.idCliente = idCliente;
 		this.nome = nome;
 		this.email = email;
 	}
+
+
 
 	public Long getIdCliente() {
 		return idCliente;

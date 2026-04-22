@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import com.guilhermef.br.Dtos.ClienteRequestDto;
 import com.guilhermef.br.Dtos.ClienteResponseDto;
 import com.guilhermef.br.entities.Cliente;
 import com.guilhermef.br.repositories.ClienteRepository;
@@ -23,12 +23,18 @@ public class ClienteService implements ClienteUpdateStrategy {
 		this.clienteRepository = clienteRepository;
 	}
 
-	public Cliente salvarCliente(Cliente cliente) {
-		return clienteRepository.save(cliente);
+	public ClienteResponseDto salvarCliente(ClienteRequestDto dto) {
+		Cliente cliente = new Cliente();
+		cliente.setNome(dto.getNome());
+		cliente.setEmail(dto.getEmail());
+		Cliente clienteSalvo = clienteRepository.save(cliente);
+		return new ClienteResponseDto(clienteSalvo.getIdCliente(), clienteSalvo.getNome());
 	}
 
-	public Cliente encontrarCliente(Long idCliente) {
-		return clienteRepository.findById(idCliente).orElse(null);
+	public ClienteResponseDto encontrarCliente(Long idCliente) {
+		Cliente cliente = clienteRepository.findById(idCliente)
+				.orElseThrow(() -> new RuntimeException("Usuario Não Encontrado"));
+		return new ClienteResponseDto(cliente.getIdCliente(), cliente.getNome());
 	}
 
 	public List<ClienteResponseDto> listarClientes() {
@@ -58,8 +64,6 @@ public class ClienteService implements ClienteUpdateStrategy {
 		if (!clienteAtualizado.getEmail().isBlank() || !clienteAtualizado.getEmail().isEmpty()) {
 			cliente.setEmail(clienteAtualizado.getEmail());
 		}
-		cliente.setEmail(cliente.getEmail());
-
 	}
 
 	@Override
@@ -67,7 +71,6 @@ public class ClienteService implements ClienteUpdateStrategy {
 		if (!clienteAtualizado.getNome().isBlank() || !clienteAtualizado.getNome().isEmpty()) {
 			cliente.setNome(clienteAtualizado.getNome());
 		}
-		cliente.setNome(cliente.getNome());
 	}
 
 }
