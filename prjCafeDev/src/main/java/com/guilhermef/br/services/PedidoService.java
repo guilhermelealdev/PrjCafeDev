@@ -21,13 +21,13 @@ public class PedidoService {
 		this.pedidoRepository = pedidoRepository;
 	}
 
-	public PedidoResponseDto salvarPedido(PedidoRequestDto dto) {
+	public PedidoResponseDto salvarPedido(PedidoRequestDto pedidoDto) {
 
 		Pedido pedido = new Pedido();
-		pedido.setCliente(dto.getCliente());
-		pedido.setDataPedido(dto.getDataPedido());
-		pedido.setDescricao(dto.getDescricao());
-		pedido.setValorTotal(dto.getValorTotal());
+		pedido.setCliente(pedidoDto.getCliente());
+		pedido.setDataPedido(pedidoDto.getDataPedido());
+		pedido.setDescricao(pedidoDto.getDescricao());
+		pedido.setValorTotal(pedidoDto.getValorTotal());
 		Pedido pedidoSalvo = pedidoRepository.save(pedido);
 		ClienteResponseDto clienteDto = new ClienteResponseDto(pedidoSalvo.getCliente().getIdCliente(),
 				pedidoSalvo.getCliente().getNome());
@@ -68,15 +68,15 @@ public class PedidoService {
 	    }).collect(Collectors.toList());
 	}
 
-	public List<Pedido> listarMaisCaros() {
+	public List<PedidoResponseDto> listarMaisCaros() {
 		return pedidoRepository.pedidosMaisCaros();
 	}
 
-	public List<Pedido> listarMaisBaratos() {
+	public List<PedidoResponseDto> listarMaisBaratos() {
 		return pedidoRepository.pedidosMaisBaratos();
 	}
 
-	public List<Pedido> buscarPorNomeCliente(String nome) {
+	public List<PedidoResponseDto> buscarPorNomeCliente(String nome) {
 		if (nome.isBlank() || nome.isEmpty()) {
 			throw new RuntimeException("Usuário não encontrado ou inexistente");
 		}

@@ -57,19 +57,19 @@ public class PedidoController {
 	
 	@GetMapping("/decrescente")
 	@Operation(summary = "Aqui fazemos um get de todos os pedidos por ordem decrescente")
-	public List<Pedido> listarPedidosMaisCaros() {
+	public List<PedidoResponseDto> listarPedidosMaisCaros() {
 		return pedidoService.listarMaisCaros();
 	}
 	
 	@GetMapping("/crescente")
 	@Operation(summary = "Aqui fazemos um get de todos os pedidos por ordem crescente")
-	public List<Pedido> listarPedidosMaisBaratos() {
+	public List<PedidoResponseDto> listarPedidosMaisBaratos() {
 		return pedidoService.listarMaisBaratos();
 	}
 	
 	@GetMapping("/cliente/{nome}")
 	@Operation(summary = "Aqui é feito um get de todos os pedidos pelo nome")
-	public List<Pedido> buscarPorNome(@PathVariable String nome){
+	public List<PedidoResponseDto> buscarPorNome(@PathVariable String nome){
 		return pedidoService.buscarPorNomeCliente(nome);
 	}
 
