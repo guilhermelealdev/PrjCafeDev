@@ -20,5 +20,5 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 	List<PedidoResponseDto> pedidosMaisBaratos();
 	
 	@Query("SELECT pedido FROM PedidoResponseDto pedido WHERE pedido.cliente.nome = :nome")
-	List<PedidoResponseDto> buscarPorNomeCliente(@Param("nome") String nome);
+List<PedidoResponseDto> buscarPorNomeCliente(@Param("nome") String nome);
 }
