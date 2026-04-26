@@ -32,14 +32,20 @@ public class ClienteController {
 		this.clienteService = clienteService;
 	}
 	
+	@Operation(summary="Aqui só redirecionamos a página para nossa página html")
+	@GetMapping("/home")
+	public String paginalInicial() {
+		return "index";
+	}
+	
 	@Operation(summary="Aqui fazemos o post de um cliente")
-	@PostMapping("/criar")
+	@PostMapping("/cadastrar")
 	public ClienteResponseDto salvarCliente(@RequestBody ClienteRequestDto clienteDto) {
 		return clienteService.salvarCliente(clienteDto);
 	}
 	
 	@Operation(summary="Aqui deletamos um cliente por id")
-	@DeleteMapping("/deletar/{idCliente}")
+	@DeleteMapping("/{idCliente}")
 	public void deletarClientePorId(@PathVariable Long idCliente) {
 		clienteService.deletarClientePorId(idCliente);
 	}
@@ -57,7 +63,7 @@ public class ClienteController {
 	}
 	
 	@Operation(summary = "Aqui criamos um response entity de um cliente para atualizar o email e o nome de um cliente")
-	@PutMapping("/atualizar/{idCliente}")
+	@PutMapping("/{idCliente}")
 	public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long idCliente, @RequestBody Cliente cliente) {
 		Cliente clienteAtualizado = clienteService.atualizarCliente(idCliente, cliente);
 

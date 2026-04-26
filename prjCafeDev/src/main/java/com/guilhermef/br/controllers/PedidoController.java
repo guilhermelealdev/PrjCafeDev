@@ -37,7 +37,7 @@ public class PedidoController {
 		return pedidoService.salvarPedido(pedido);
 	}
 
-	@DeleteMapping("/deletar/{idPedido}")
+	@DeleteMapping("/{idPedido}")
 	@Operation(summary = "Aqui fazemos um delete simples do pedido")
 	public void deletarPedido(@PathVariable Long idPedido) {
 		pedidoService.deletarPedido(idPedido);

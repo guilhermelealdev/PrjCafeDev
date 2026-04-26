@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pedidos - Buscar</title>
+  </head>
+  <body>
+    <label for="informacaoPedido">Descricção do pedido</label>
+    <input
+      type="text"
+      id="informacaoPedido"
+      placeholder="(ex: latte python combo)"
+    />
+    <button onclick="buscarPedido()" id="buscarPedido">
+      <strong>Buscar decrescente</strong>
+    </button>
+    <h3>
+      <strong id="lista"
+        >(mudar o nome da lista dependendo de que tipo é)</strong
+      >
+    </h3>
+    <div id="tabela-container">
+      <table class="tabela" id="cliente-tabela">
+        <thead>
+          <tr>
+            <th class="categoria">ID Pedido</th>
+            <th class="categoria">Descrição</th>
+            <th class="categoria">Data</th>
+            <th class="categoria">Valor total</th>
+            <th class="categoria">ID do Cliente</th>
+            <th class="categoria">Nome do Cliente</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <a href="../pedidos.html">VOLTAR</a>
+  </body>
+</html>

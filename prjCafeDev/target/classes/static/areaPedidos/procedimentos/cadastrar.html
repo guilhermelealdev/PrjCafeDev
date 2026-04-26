@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pedidos - Cadastro</title>
+  </head>
+  <body>
+    <h2>Cadastrar Pedido</h2>
+
+    <form id="cadastro">
+      <label for="descricao">Descrição:</label>
+      <input type="text" id="descricao" required />
+      <label for="idCliente">ID do cliente:</label>
+      <input type="number" id="idCliente" required />
+      <label for="dataPedido">Data pedido:</label>
+      <input
+        type="text"
+        id="dataPedido"
+        placeholder="ex: 09-09-2026"
+        required
+      />
+      <label for="valorTotal">Valor total:</label>
+      <input type="number" id="valorTotal" placeholder="ex: 10.50" required />
+
+      <button onclick="cadastrarPedido()">Cadastrar</button>
+    </form>
+    <a href="../pedidos.html">VOLTAR</a>
+    <script src="../../script.js"></script>
+  </body>
+</html>
