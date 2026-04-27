@@ -3,7 +3,7 @@ const Api = "http://localhost:8080";
 async function cadastrarClientes(event) {
   event?.preventDefault();
   const nomeCliente = document.getElementById("nomeCliente").value.trim();
-  const email = document.getElementById("emailCliente").value.trim()
+  const email = document.getElementById("emailCliente").value.trim();
 
   try {
     const resposta = await fetch(`${Api}/clientes/cadastrar`, {
@@ -11,7 +11,7 @@ async function cadastrarClientes(event) {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
         nome: nomeCliente,
-        email: email
+        email: email,
       }),
     });
 
@@ -51,16 +51,16 @@ async function cadastrarPedido(event) {
 
 async function atualizarCliente(event) {
   event?.preventDefault();
-  const nome = document.getElementById("nomeCliente").value.trim()  
-  const email = document.getElementById("emailCliente").value.trim()
+  const nome = document.getElementById("nomeCliente").value.trim();
+  const email = document.getElementById("emailCliente").value.trim();
   const idCliente = document.getElementById("idCliente").value.trim();
   try {
-      const resposta = await fetch(`${Api}/clientes/${idCliente}`, {
+    const resposta = await fetch(`${Api}/clientes/${idCliente}`, {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
         nome: nome,
-        email: email
+        email: email,
       }),
     });
 
@@ -170,11 +170,10 @@ async function deletarPedido() {
     const resposta = await fetch(`${Api}/clientes/${idPedido}`, {
       method: "DELETE",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ idPedido }),
     });
     if (!resposta.ok) throw new Error(resposta.status);
     alert("PEDIDO DELETADO COM SUCESSO!");
-    document.getElementById("deletar").reset();
+    document.getElementById("deletarFormulario").reset();
   } catch (err) {
     alert("ERRO AO DELETAR");
     console.error(err);
@@ -337,9 +336,9 @@ function buscarPedido() {
   const informacao = document.getElementById("informacaoPedido").value.trim();
 
   if (!isNaN(informacao)) {
-    console.log(typeof informacao);
+    console.log(typeof(informacao));
 
-    return buscarPorId(Number(informacao));
+    return buscarPorId(informacao);
   }
   return buscarPorNome(informacao);
 }
