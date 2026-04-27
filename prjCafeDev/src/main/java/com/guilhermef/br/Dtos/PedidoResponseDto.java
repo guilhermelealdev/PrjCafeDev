@@ -28,10 +28,6 @@ public class PedidoResponseDto {
 	private ClienteResponseDto cliente;
 
 	
-	public PedidoResponseDto() {
-		
-	}
-	
 	public PedidoResponseDto(Long idPedido, @NotBlank(message = "Descrição obrigatória!") String descricao,
 			@NotNull(message = "Valor inválido!") double valorTotal,
 			@NotBlank(message = "Data inválida!") String dataPedido, ClienteResponseDto cliente) {

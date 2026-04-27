@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.guilhermef.br.Dtos.ClienteResponseDto;
 import com.guilhermef.br.Dtos.PedidoRequestDto;
 import com.guilhermef.br.Dtos.PedidoResponseDto;
 import com.guilhermef.br.entities.Pedido;
@@ -31,7 +32,7 @@ public class PedidoController {
 		this.pedidoService = pedidoService;
 	}
 
-	@PostMapping("/criar")
+	@PostMapping("/cadastrar")
 	@Operation(summary = "Aqui fazemos um post simples do pedido")
 	public PedidoResponseDto salvarPedido(@RequestBody PedidoRequestDto pedido) {
 		return pedidoService.salvarPedido(pedido);
@@ -54,23 +55,40 @@ public class PedidoController {
 	public List<PedidoResponseDto> listarPedidos() {
 		return pedidoService.listarPedidos();
 	}
-	
+
 	@GetMapping("/decrescente")
 	@Operation(summary = "Aqui fazemos um get de todos os pedidos por ordem decrescente")
 	public List<PedidoResponseDto> listarPedidosMaisCaros() {
-		return pedidoService.listarMaisCaros();
+		List<Pedido> pedidos = pedidoService.listarMaisCaros();
+		
+		return pedidos.stream()
+				.map(pedido -> new PedidoResponseDto(pedido.getIdPedido(), pedido.getDescricao(),
+						pedido.getValorTotal(), pedido.getDataPedido(),
+						new ClienteResponseDto(pedido.getCliente().getIdCliente(), pedido.getCliente().getNome())))
+				.toList();
 	}
-	
+
 	@GetMapping("/crescente")
 	@Operation(summary = "Aqui fazemos um get de todos os pedidos por ordem crescente")
 	public List<PedidoResponseDto> listarPedidosMaisBaratos() {
-		return pedidoService.listarMaisBaratos();
+		List<Pedido> pedidos = pedidoService.listarMaisBaratos();
+		return pedidos.stream()
+				.map(pedido -> new PedidoResponseDto(pedido.getIdPedido(), pedido.getDescricao(),
+						pedido.getValorTotal(), pedido.getDataPedido(),
+						new ClienteResponseDto(pedido.getCliente().getIdCliente(), pedido.getCliente().getNome())))
+				.toList();
 	}
-	
+
 	@GetMapping("/cliente/{nome}")
 	@Operation(summary = "Aqui é feito um get de todos os pedidos pelo nome")
-	public List<PedidoResponseDto> buscarPorNome(@PathVariable String nome){
-		return pedidoService.buscarPorNomeCliente(nome);
+	public List<PedidoResponseDto> buscarPorNome(@PathVariable String nome) {
+		List<Pedido> pedidos = pedidoService.buscarPorNomeCliente(nome);
+
+		return pedidos.stream()
+				.map(pedido -> new PedidoResponseDto(pedido.getIdPedido(), pedido.getDescricao(),
+						pedido.getValorTotal(), pedido.getDataPedido(),
+						new ClienteResponseDto(pedido.getCliente().getIdCliente(), pedido.getCliente().getNome())))
+				.toList();
 	}
 
 }

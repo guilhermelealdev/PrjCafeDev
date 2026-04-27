@@ -21,7 +21,6 @@ public class ClienteResponseDto {
 	
 	
 	public ClienteResponseDto(Long idCliente, @NotBlank(message = "Nome inválido!") String nome) {
-		super();
 		this.idCliente = idCliente;
 		this.nome = nome;
 	}
