@@ -1,6 +1,7 @@
 const Api = "http://localhost:8080";
 
-async function cadastrarClientes() {
+async function cadastrarClientes(event) {
+  event?.preventDefault();
   const nomeCliente = document.getElementById("nomeCliente").value.trim();
   const email = document.getElementById("emailCliente").value.trim()
 
@@ -9,8 +10,8 @@ async function cadastrarClientes() {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
-        nomeCliente,
-        email
+        nome: nomeCliente,
+        email: email
       }),
     });
 
@@ -25,7 +26,8 @@ async function cadastrarClientes() {
   }
 }
 
-async function cadastrarPedido() {
+async function cadastrarPedido(event) {
+  event?.preventDefault();
   const descricao = document.getElementById("descricao").value.trim();
   const valorTotal = document.getElementById("valorTotal").value.trim();
   const dataPedido = document.getElementById("dataPedido").value.trim();
